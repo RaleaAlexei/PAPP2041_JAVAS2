@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/incrementButton"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="30px"
+        app:strokeColor="@android:color/holo_green_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="INCREMENTARE"
+        android:textSize="30px"
+        android:textColor="@android:color/holo_blue_light"
+        android:backgroundTint="@color/brown"
+        android:layout_centerInParent="true"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/decrementButton"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="30px"
+        app:strokeColor="@android:color/holo_green_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30px"
+        android:text="DECREMENTARE"
+        android:backgroundTint="@color/brown"
+        android:textColor="@android:color/holo_blue_light"
+        android:layout_below="@id/incrementButton"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/counterTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="30px"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/incrementButton"
+        android:layout_marginBottom="16dp"/>
+
+</RelativeLayout>
