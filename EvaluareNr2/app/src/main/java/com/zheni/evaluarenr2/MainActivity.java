@@ -2,6 +2,7 @@ package com.zheni.evaluarenr2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,15 +28,8 @@ public class MainActivity extends AppCompatActivity {
         spinnerFigures.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    editText1.setHint("Raza");
-                    editText2.setVisibility(View.GONE);
-                    editText3.setVisibility(View.GONE);
-                } else if (position == 1) {
-                    editText1.setHint("Baza mare");
-                    editText2.setVisibility(View.VISIBLE);
-                    editText3.setVisibility(View.VISIBLE);
-                }
+                editText2.setVisibility(position == 0 ? View.GONE : View.VISIBLE);
+                editText3.setVisibility(position == 0 ? View.GONE : View.VISIBLE);
             }
 
             @Override
@@ -48,25 +42,46 @@ public class MainActivity extends AppCompatActivity {
             double perimetru = 0.0;
             double aria = 0.0;
             try {
-                double raza_bazaMare = Double.parseDouble(editText1.getText().toString());
+                double latura1 = Double.parseDouble(editText1.getText().toString());
                 String figura = spinnerFigures.getSelectedItem().toString();
                 switch (figura) {
-                    case "Cerc":
-                        perimetru = 2 * Math.PI * raza_bazaMare;
-                        aria = Math.PI * raza_bazaMare * raza_bazaMare;
+                    case "Patrat":
+                        perimetru = 4 * latura1;
+                        aria = latura1 * latura1;
                         break;
-                    case "Trapez":
-                        double bazaMica = Double.parseDouble(editText2.getText().toString());
-                        double inaltimea = Double.parseDouble(editText3.getText().toString());
-                        perimetru = 2 * (((raza_bazaMare - bazaMica) / 2) * ((raza_bazaMare - bazaMica) / 2) + inaltimea * inaltimea) + raza_bazaMare + bazaMica;
-                        aria = (raza_bazaMare + bazaMica) / 2 * inaltimea;
+                    case "Triunghi":
+                        double latura2 = Double.parseDouble(editText2.getText().toString());
+                        double latura3 = Double.parseDouble(editText3.getText().toString());
+                        if(!isValidTriangle(latura1, latura2, latura3)){
+                            textView.setText("Triunghi invalid!");
+                            return;
+                        }
+                        perimetru = calculatePerimeter(latura1, latura2, latura3);
+                        aria = calculateArea(latura1, latura2, latura3);
                         break;
                 }
-                textView.setText(String.format("Perimetrul %s: %.2f, Aria: %.2f", figura.toLowerCase(), perimetru, aria));
+                Intent intent = new Intent(MainActivity.this, Figura.class);
+                intent.putExtra("perimeter", perimetru);
+                intent.putExtra("area", aria);
+                intent.putExtra("shape", figura.toLowerCase());
+                startActivity(intent);
             }
             catch(NumberFormatException ex){
                 textView.setText("A aparut o eroare la citirea datelor!");
             }
         });
+    }
+    public boolean isValidTriangle(double a, double b, double c) {
+        return a + b > c && a + c > b && b + c > a;
+    }
+
+    public double calculatePerimeter(double a, double b, double c) {
+        return a + b + c;
+    }
+
+    public double calculateArea(double a, double b, double c) {
+        // Formula lu Heron
+        double s = (a + b + c) / 2;
+        return Math.sqrt(s * (s - a) * (s - b) * (s - c));
     }
 }
