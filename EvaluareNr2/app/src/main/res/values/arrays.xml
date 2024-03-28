@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="figures_array">
+        <item>Cerc</item>
+        <item>Trapez</item>
+    </string-array>
+</resources>

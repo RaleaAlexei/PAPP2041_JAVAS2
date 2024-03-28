@@ -9,15 +9,15 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/incrementButton"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        app:cornerRadius="30px"
-        app:strokeColor="@android:color/holo_green_light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="INCREMENTARE"
-        android:textSize="30px"
-        android:textColor="@android:color/holo_blue_light"
+        android:layout_centerInParent="true"
         android:backgroundTint="@color/brown"
-        android:layout_centerInParent="true"/>
+        android:text="INCREMENTARE"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="30px"
+        app:cornerRadius="0px"
+        app:strokeColor="@android:color/holo_green_light" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/decrementButton"
